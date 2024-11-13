@@ -1,0 +1,6 @@
+@ZadanieRekrutacyjneNetwiseAPI_HostAddress = http://localhost:5229
+
+GET {{ZadanieRekrutacyjneNetwiseAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
