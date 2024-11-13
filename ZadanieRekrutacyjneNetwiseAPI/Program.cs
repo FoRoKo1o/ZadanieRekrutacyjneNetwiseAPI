@@ -1,4 +1,7 @@
 
+using ZadanieRekrutacyjneNetwiseAPI.Contracts;
+using ZadanieRekrutacyjneNetwiseAPI.Services;
+
 namespace ZadanieRekrutacyjneNetwiseAPI
 {
     public class Program
@@ -14,6 +17,9 @@ namespace ZadanieRekrutacyjneNetwiseAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddHttpClient();
+            builder.Services.AddScoped<IFileService, FileService>();
+            builder.Services.AddScoped<ICatService, CatFactService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
