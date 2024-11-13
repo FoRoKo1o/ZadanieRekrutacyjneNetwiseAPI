@@ -44,6 +44,26 @@ namespace ZadanieRekrutacyjneNetwiseAPI.Controllers
             {
                 var factsList = await _fileService.GetAllFactsFromFileAsync();
 
+                if (factsList.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(factsList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetSavedCatsPage")]
+        public async Task<IActionResult> Get(int page, int pageSize)
+        {
+            try
+            {
+                var factsList = await _fileService.GetFactsPageAsync(page, pageSize);
+
                 return Ok(factsList);
             }
             catch (Exception ex)

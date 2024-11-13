@@ -26,7 +26,7 @@ namespace ZadanieRekrutacyjneNetwiseAPI.Services
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     var fact = JsonConvert.DeserializeObject<CatFact>(content);
-                    if(fact != null)
+                    if (fact != null)
                     {
                         fact.DownloadDate = DateTime.Now;
                         factsList.Add(fact);
