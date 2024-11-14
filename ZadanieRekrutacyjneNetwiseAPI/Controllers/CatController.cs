@@ -20,7 +20,7 @@ namespace ZadanieRekrutacyjneNetwiseAPI.Controllers
 
         [HttpGet]
         [Route("SaveFactsFromApi")]
-        public async Task<IActionResult> Get(int amount)
+        public async Task<IActionResult> SaveFactsFromApi(int amount)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace ZadanieRekrutacyjneNetwiseAPI.Controllers
 
         [HttpGet]
         [Route("GetAllSavedCats")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAllSavedCats()
         {
             try
             {
@@ -58,13 +58,28 @@ namespace ZadanieRekrutacyjneNetwiseAPI.Controllers
         }
         [HttpGet]
         [Route("GetSavedCatsPage")]
-        public async Task<IActionResult> Get(int page, int pageSize)
+        public async Task<IActionResult> GetSavedCatsPage(int page, int pageSize)
         {
             try
             {
                 var factsList = await _fileService.GetFactsPageAsync(page, pageSize);
 
                 return Ok(factsList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetSavedFactsAmount")]
+        public async Task<IActionResult> GetSavedFactsAmount()
+        {
+            try
+            {
+                var factsAmount = await _fileService.GetFileSizeAsync();
+
+                return Ok(factsAmount);
             }
             catch (Exception ex)
             {
