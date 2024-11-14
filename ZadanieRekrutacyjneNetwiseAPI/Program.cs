@@ -20,6 +20,15 @@ namespace ZadanieRekrutacyjneNetwiseAPI
             builder.Services.AddHttpClient();
             builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddScoped<ICatService, CatFactService>();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -33,7 +42,7 @@ namespace ZadanieRekrutacyjneNetwiseAPI
 
             app.UseAuthorization();
 
-
+            app.UseCors("AllowAll");
             app.MapControllers();
 
             app.Run();
