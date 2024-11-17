@@ -1,4 +1,5 @@
 
+using System.Net;
 using ZadanieRekrutacyjneNetwiseAPI.Contracts;
 using ZadanieRekrutacyjneNetwiseAPI.Services;
 
@@ -9,6 +10,11 @@ namespace ZadanieRekrutacyjneNetwiseAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.Listen(IPAddress.Any, 40640);
+
+            });
 
             // Add services to the container.
 
@@ -38,7 +44,7 @@ namespace ZadanieRekrutacyjneNetwiseAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

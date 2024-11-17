@@ -14,15 +14,15 @@ namespace ZadanieRekrutacyjneNetwiseAPI.Services
         }
         public async Task SaveFactsToFileAsync(List<CatFact> facts)
         {
-            using (var streamWriter = new StreamWriter(_filePath, append: true))
-            {
+            using var streamWriter = new StreamWriter(_filePath, append: true); //removed brackets from using statement (C# 8.0 feature)
+            
                 foreach (var fact in facts)
                 {
                     var jsonContent = JsonConvert.SerializeObject(fact);
 
                     await streamWriter.WriteLineAsync(jsonContent);
+                
                 }
-            }
         }
         public async Task<List<CatFact>> GetAllFactsFromFileAsync()
         {
